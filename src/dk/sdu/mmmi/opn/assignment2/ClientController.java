@@ -1,143 +1,139 @@
 package dk.sdu.mmmi.opn.assignment2;
 
-import javax.swing.JLabel;
-import javax.swing.JTextPane;
+import javax.swing.*;
 
 /**
  * Controller for the application
- * @author ups
  *
+ * @author ups
  */
 public class ClientController {
 
-	/**
-	 * Singleton pattern instance
-	 */
-	private static ClientController instance;
+    /**
+     * Singleton pattern instance
+     */
+    private static ClientController instance;
+    /**
+     * The area in which text can be displayed
+     */
+    private JTextPane displayArea;
+    /**
+     * The label in which the current status can be displayed
+     */
+    private JLabel statusLabel;
+    /**
+     * The catalogue being manipulated
+     */
+    private ICatalog catalogue;
 
-	/**
-	 * Singleton pattern access method
-	 */
-	public static synchronized ClientController get() {
-		if(instance==null) instance = new ClientController();
-		return instance; 
-	}
+    /**
+     * Initialize, including connecting to a specific catalogue
+     */
+    private ClientController() {
+        catalogue = new CatalogImpl();
+    }
 
-	/**
-	 * The area in which text can be displayed
-	 */
-	private JTextPane displayArea;
-	
-	/**
-	 * The label in which the current status can be displayed
-	 */
-	private JLabel statusLabel;
-	
-	/**
-	 * The catalogue being manipulated
-	 */
-	private ICatalog catalogue;
-	
-	/**
-	 * Initialize, including connecting to a specific catalogue
-	 */
-	private ClientController() { 
-		catalogue = new CatalogImpl();
-	}
-	
-	/**
-	 * Increase button clicked in GUI
-	 */
-	public void increaseAction(String productName, String amountText) {
-		changeEntry(productName,amountText,true);
-	}
+    /**
+     * Singleton pattern access method
+     */
+    public static synchronized ClientController get() {
+        if (instance == null) instance = new ClientController();
+        return instance;
+    }
 
-	/**
-	 * Decrease button clicked in GUI
-	 */
-	public void decreaseAction(String productName, String amountText) {
-		changeEntry(productName,amountText,false);
-	}
+    /**
+     * Increase button clicked in GUI
+     */
+    public void increaseAction(String productName, String amountText) {
+        changeEntry(productName, amountText, true);
+    }
 
-	/**
-	 * Helper: generic implementation of the increase/decrease action
-	 */
-	private void changeEntry(String productName, String amountText, boolean increase) {
-		int amount = Integer.parseInt(amountText);
-		IEntry entry = catalogue.getEntry(productName);
-		if(entry==null) {
-			setStatus("No such entry: "+productName);
-			return;
-		}
-		if(entry.updateQuantity(increase ? amount : -amount)) // Returns true if success
-			updateDisplay();
-		else
-			setStatus("Negative stock not allowed");
-	}
+    /**
+     * Decrease button clicked in GUI
+     */
+    public void decreaseAction(String productName, String amountText) {
+        changeEntry(productName, amountText, false);
+    }
 
-	/**
-	 * Show the status to the user 
-	 */
-	private void setStatus(String status) {
-		if(statusLabel==null) throw new Error("Internal error: unable to display status");
-		statusLabel.setText(status);
-	}
+    /**
+     * Helper: generic implementation of the increase/decrease action
+     */
+    private void changeEntry(String productName, String amountText, boolean increase) {
+        int amount = Integer.parseInt(amountText);
+        IEntry entry = catalogue.getEntry(productName);
+        if (entry == null) {
+            setStatus("No such entry: " + productName);
+            return;
+        }
+        if (entry.updateQuantity(increase ? amount : -amount)) // Returns true if success
+            updateDisplay();
+        else
+            setStatus("Negative stock not allowed");
+    }
 
-	/**
-	 * Update display, showing the current entries and their total value
-	 */
-	private void updateDisplay() {
-		// Check that controller is properly initialized
-		if(catalogue==null) throw new Error("Internal error: catalogue not set");
-		if(displayArea==null) throw new Error("Internal error: display area not set");
-		// Then do the display
-		StringBuffer result = new StringBuffer();
-		float value = 0;
-		// For each item in the stock, add it to the description list and the total value
-		for(String name: catalogue.getEntryNames()) {
-			IEntry entry = catalogue.getEntry(name);
-			Product product = entry.getProduct();
-			result.append(product.getName()+"@"+product.getPrice()+": "+entry.getQuantity()+"\n");
-			value += entry.getQuantity()*product.getPrice();
-		}
-		result.append("Total value: "+value);
-		displayArea.setText(result.toString());
-	}
+    /**
+     * Show the status to the user
+     */
+    private void setStatus(String status) {
+        if (statusLabel == null) throw new Error("Internal error: unable to display status");
+        statusLabel.setText(status);
+    }
 
-	/**
-	 * Search button clicked in GUI: use text area to show matching products
-	 */
-	public void searchAction(String prefix) {
-		StringBuffer result = new StringBuffer();
-		for(Product product: catalogue.search(prefix)) {
-			result.append(product.getName()+"\n");
-		}
-		displayArea.setText(result.toString());
-	}
+    /**
+     * Update display, showing the current entries and their total value
+     */
+    private void updateDisplay() {
+        // Check that controller is properly initialized
+        if (catalogue == null) throw new Error("Internal error: catalogue not set");
+        if (displayArea == null) throw new Error("Internal error: display area not set");
+        // Then do the display
+        StringBuffer result = new StringBuffer();
+        float value = 0;
+        // For each item in the stock, add it to the description list and the total value
+        for (String name : catalogue.getEntryNames()) {
+            IEntry entry = catalogue.getEntry(name);
+            Product product = entry.getProduct();
+            result.append(product.getName() + "@" + product.getPrice() + ": " + entry.getQuantity() + "\n");
+            value += entry.getQuantity() * product.getPrice();
+        }
+        result.append("Total value: " + value);
+        displayArea.setText(result.toString());
+    }
 
-	/**
-	 * Clear button clicked in GUI: go back to inventory display
-	 */
-	public void clearAction() {
-		updateDisplay();
-	}
-	
-	/**
-	 * Set the inventory display object
-	 * (Note: high coupling, ideally use observer instead)
-	 */
-	public void setInventoryDisplay(JTextPane entriesDisplay) {
-		this.displayArea = entriesDisplay;
-		updateDisplay();
-	}
-	
-	/**
-	 * Set the status display object
-	 * (Note: high coupling, ideally use observer instead)
-	 */
-	public void setStatusArea(JLabel label) {
-		this.statusLabel = label;
-		setStatus("Ready");
-	}
+    /**
+     * Search button clicked in GUI: use text area to show matching products
+     */
+    public void searchAction(String prefix) {
+        StringBuffer result = new StringBuffer();
+        for (Product product : catalogue.search(prefix)) {
+            result.append(product.getName() + "\n");
+        }
+        displayArea.setText(result.toString());
+    }
+
+    /**
+     * Clear button clicked in GUI: go back to inventory display
+     */
+    public void clearAction() {
+        updateDisplay();
+    }
+
+    /**
+     * Set the inventory display object
+     * (Note: high coupling, ideally use observer instead)
+     */
+    public void setInventoryDisplay(JTextPane entriesDisplay) {
+        this.displayArea = entriesDisplay;
+        updateDisplay();
+    }
+
+    /**
+     * Set the status display object
+     * (Note: high coupling, ideally use observer instead)
+     */
+    public void setStatusArea(JLabel label) {
+        this.statusLabel = label;
+        setStatus("Ready");
+    }
 
 }
