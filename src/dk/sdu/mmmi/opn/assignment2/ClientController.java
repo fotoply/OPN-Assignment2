@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.opn.assignment2;
 
 import javax.swing.*;
+import java.rmi.RemoteException;
 
 /**
  * Controller for the application
@@ -30,7 +31,11 @@ public class ClientController {
      * Initialize, including connecting to a specific catalogue
      */
     private ClientController() {
-        catalogue = new CatalogImpl();
+        try {
+            catalogue = new CatalogImpl();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

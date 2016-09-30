@@ -1,6 +1,9 @@
 package dk.sdu.mmmi.opn.assignment2;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of a catalog
@@ -8,7 +11,7 @@ import java.util.*;
  *
  * @author ups
  */
-public class CatalogImpl implements ICatalog {
+public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
 
     private static final String[] PRODUCT_NAMES = {
             "cucumber", "carrot", "potato", "pear", "apple", "zucchini", "beet", "onion", "tomato", "orange", "banana", "grapes", "sweet potato",
@@ -22,7 +25,8 @@ public class CatalogImpl implements ICatalog {
     /**
      * Create and initialize the stock
      */
-    public CatalogImpl() {
+    public CatalogImpl() throws RemoteException {
+        super();
         initializeStock();
     }
 
@@ -39,9 +43,7 @@ public class CatalogImpl implements ICatalog {
      */
     @Override
     public List<Product> search(String pattern) {
-        ArrayList<Product> result = new ArrayList<>();
-        for (Map.Entry<String, IEntry> entry : stock.entrySet())
-            if (entry.getKey().startsWith(pattern)) result.add(entry.getValue().getProduct());
+        ArrayList<Product> result = stock.entrySet().stream().filter(entry -> entry.getKey().startsWith(pattern)).map(entry -> entry.getValue().getProduct()).collect(Collectors.toCollection(ArrayList::new));
         return result;
     }
 
@@ -56,7 +58,7 @@ public class CatalogImpl implements ICatalog {
     /**
      * Initialize stock with dummy products
      */
-    private void initializeStock() {
+    private void initializeStock() throws RemoteException {
         Random random = new Random();
         for (int i = 0; i < PRODUCT_NAMES.length; i++)
             stock.put(PRODUCT_NAMES[i], new EntryImpl(new Product(PRODUCT_NAMES[i], random.nextInt(1000) / 100.0f), random.nextInt(10)));

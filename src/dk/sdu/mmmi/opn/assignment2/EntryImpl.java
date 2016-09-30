@@ -1,12 +1,15 @@
 package dk.sdu.mmmi.opn.assignment2;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 /**
  * Implementation of a product entry, with a mutable quantity
  * (part of the model layer of the application)
  *
  * @author ups
  */
-public class EntryImpl implements IEntry {
+public class EntryImpl extends UnicastRemoteObject implements IEntry {
 
     /**
      * The product which this entry concerns
@@ -21,7 +24,8 @@ public class EntryImpl implements IEntry {
     /**
      * Create entry for the given product and with the given quantity
      */
-    public EntryImpl(Product product, int quantity) {
+    public EntryImpl(Product product, int quantity) throws RemoteException {
+        super();
         this.product = product;
         this.quantity = quantity;
     }
