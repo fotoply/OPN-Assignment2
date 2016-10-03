@@ -2,6 +2,7 @@ package dk.sdu.mmmi.opn.assignment2;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -11,9 +12,11 @@ import java.util.Set;
 public class ServerController extends UnicastRemoteObject implements IServer {
 
     private ICatalog catalog;
+    private List<ICatalogListener> listeners;
 
     public ServerController() throws RemoteException {
         catalog = new CatalogImpl();
+        listeners = new ArrayList<>();
     }
 
     @Override
@@ -29,5 +32,9 @@ public class ServerController extends UnicastRemoteObject implements IServer {
     @Override
     public Set<String> getEntries() throws RemoteException {
         return catalog.getEntryNames();
+    }
+
+    public void addEntryUpdateListener(ICatalogListener newListener) {
+        listeners.add(newListener);
     }
 }

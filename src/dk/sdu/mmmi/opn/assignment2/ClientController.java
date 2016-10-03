@@ -110,7 +110,7 @@ public class ClientController {
      */
     public void searchAction(String prefix) {
         StringBuffer result = new StringBuffer();
-        for (Product product : catalogue.search(prefix)) {
+        for (IProduct product : catalogue.search(prefix)) {
             result.append(product.getName()).append("\n");
         }
         displayArea.setText(result.toString());
