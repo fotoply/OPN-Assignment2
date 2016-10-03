@@ -14,17 +14,17 @@ import java.util.List;
 public class ServerController extends UnicastRemoteObject implements IServer {
 
     private ICatalog catalog;
-    private List<ICatalogListener> listeners;
 
     public ServerController() throws RemoteException {
-        catalog = new CatalogImpl();
-        listeners = new ArrayList<>();
-        System.out.println("Initialized catalog and listeners array");
+        catalog = new ServerListenerCatalog();
+        System.out.println("Initialized catalog");
     }
 
     @Override
     public void addEntryUpdateListener(ICatalogListener newListener) throws RemoteException {
-        listeners.add(newListener);
+        for (String entryName : catalog.getEntryNames()) {
+            ((ServerListenerEntry)catalog.getEntry(entryName)).addListener(newListener);
+        }
     }
 
     @Override
