@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created 10/3/16
  */
-public class ServerController extends UnicastRemoteObject{
+public class ServerController extends UnicastRemoteObject implements IServer {
 
     private ICatalog catalog;
 
@@ -16,14 +16,17 @@ public class ServerController extends UnicastRemoteObject{
         catalog = new CatalogImpl();
     }
 
+    @Override
     public List<IProduct> searchForProduct(String searchString) throws RemoteException{
         return catalog.search(searchString);
     }
 
+    @Override
     public IEntry getEntry(String name) throws RemoteException {
         return catalog.getEntry(name);
     }
 
+    @Override
     public Set<String> getEntries() throws RemoteException {
         return catalog.getEntryNames();
     }
