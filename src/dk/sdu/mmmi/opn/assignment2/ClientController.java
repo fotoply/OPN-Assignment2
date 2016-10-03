@@ -98,10 +98,10 @@ public class ClientController {
         for (String name : catalogue.getEntryNames()) {
             IEntry entry = catalogue.getEntry(name);
             Product product = entry.getProduct();
-            result.append(product.getName() + "@" + product.getPrice() + ": " + entry.getQuantity() + "\n");
+            result.append(product.getName()).append("@").append(product.getPrice()).append(": ").append(entry.getQuantity()).append("\n");
             value += entry.getQuantity() * product.getPrice();
         }
-        result.append("Total value: " + value);
+        result.append("Total value: ").append(value);
         displayArea.setText(result.toString());
     }
 
@@ -111,7 +111,7 @@ public class ClientController {
     public void searchAction(String prefix) {
         StringBuffer result = new StringBuffer();
         for (Product product : catalogue.search(prefix)) {
-            result.append(product.getName() + "\n");
+            result.append(product.getName()).append("\n");
         }
         displayArea.setText(result.toString());
     }
