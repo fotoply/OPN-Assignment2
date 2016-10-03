@@ -6,5 +6,5 @@ import java.rmi.Remote;
  * Created 10/3/16
  */
 public interface ICatalogListener extends Remote {
-    void entryUpdated(IEntry newEntry);
+    void entryUpdated();
 }

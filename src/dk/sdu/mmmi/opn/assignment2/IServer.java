@@ -10,9 +10,7 @@ import java.util.Set;
  */
 public interface IServer extends Remote {
 
-    List<IProduct> searchForProduct(String searchString) throws RemoteException;
+    void addEntryUpdateListener(ICatalogListener newListener);
 
-    IEntry getEntry(String name) throws RemoteException;
-
-    Set<String> getEntries() throws RemoteException;
+    ICatalog getCatalog();
 }

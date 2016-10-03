@@ -1,15 +1,20 @@
 package dk.sdu.mmmi.opn.assignment2;
 
 import javax.swing.*;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Controller for the application
  *
  * @author ups
  */
-public class ClientController {
+public class ClientController extends UnicastRemoteObject implements ICatalogListener{
 
+    private static IServer server;
     /**
      * Singleton pattern instance
      */
@@ -30,11 +35,21 @@ public class ClientController {
     /**
      * Initialize, including connecting to a specific catalogue
      */
-    private ClientController() {
+    private ClientController() throws RemoteException {
+        super();
+        server = connectToServer("localhost");
+        catalogue = server.getCatalog();
+    }
+
+    protected IServer connectToServer(String serverName) {
+        Registry registry;
         try {
-            catalogue = new CatalogImpl();
-        } catch (RemoteException e) {
-            e.printStackTrace();
+            registry = LocateRegistry.getRegistry(serverName, RMI_Config.REGISTRY_PORT);
+            IServer server = (IServer)registry.lookup(RMI_Config.OBJECT_NAME);
+            server.addEntryUpdateListener(this);
+            return server;
+        } catch (RemoteException | NotBoundException e) {
+            throw new Error("Error when connecting to server: "+e);
         }
     }
 
@@ -42,7 +57,11 @@ public class ClientController {
      * Singleton pattern access method
      */
     public static synchronized ClientController get() {
-        if (instance == null) instance = new ClientController();
+        if (instance == null) try {
+            instance = new ClientController();
+        } catch (RemoteException e) {
+            System.out.println("Unable to connect to localhost server");
+        }
         return instance;
     }
 
@@ -141,4 +160,8 @@ public class ClientController {
         setStatus("Ready");
     }
 
+    @Override
+    public void entryUpdated() {
+        updateDisplay();
+    }
 }

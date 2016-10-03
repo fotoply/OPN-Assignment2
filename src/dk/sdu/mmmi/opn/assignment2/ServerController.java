@@ -20,21 +20,12 @@ public class ServerController extends UnicastRemoteObject implements IServer {
     }
 
     @Override
-    public List<IProduct> searchForProduct(String searchString) throws RemoteException{
-        return catalog.search(searchString);
-    }
-
-    @Override
-    public IEntry getEntry(String name) throws RemoteException {
-        return catalog.getEntry(name);
-    }
-
-    @Override
-    public Set<String> getEntries() throws RemoteException {
-        return catalog.getEntryNames();
-    }
-
     public void addEntryUpdateListener(ICatalogListener newListener) {
         listeners.add(newListener);
+    }
+
+    @Override
+    public ICatalog getCatalog() {
+        return catalog;
     }
 }
