@@ -34,7 +34,7 @@ public class EntryImpl extends UnicastRemoteObject implements IEntry {
      * Get the quantity
      */
     @Override
-    public int getQuantity() {
+    public int getQuantity() throws RemoteException {
         return quantity;
     }
 
@@ -52,7 +52,7 @@ public class EntryImpl extends UnicastRemoteObject implements IEntry {
      * Get the product
      */
     @Override
-    public Product getProduct() {
+    public Product getProduct() throws RemoteException {
         return product;
     }
 

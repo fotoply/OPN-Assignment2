@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 /**
  * GUI for the application, built using WindowMaker.
@@ -21,7 +22,7 @@ public class ClientGUI {
     /**
      * Create the application.
      */
-    public ClientGUI() {
+    public ClientGUI() throws RemoteException {
         initialize();
     }
 
@@ -42,7 +43,7 @@ public class ClientGUI {
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize() throws RemoteException{
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 352);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,12 +82,24 @@ public class ClientGUI {
         txtAmount.setColumns(10);
 
         JButton btnIncrease = new JButton("Increase");
-        btnIncrease.addActionListener(e -> ClientController.get().increaseAction(txtName.getText(), txtAmount.getText()));
+        btnIncrease.addActionListener(e -> {
+            try {
+                ClientController.get().increaseAction(txtName.getText(), txtAmount.getText());
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
+            }
+        });
         btnIncrease.setBounds(302, 124, 117, 29);
         frame.getContentPane().add(btnIncrease);
 
         JButton btnDecrease = new JButton("Decrease");
-        btnDecrease.addActionListener(e -> ClientController.get().decreaseAction(txtName.getText(), txtAmount.getText()));
+        btnDecrease.addActionListener(e -> {
+            try {
+                ClientController.get().decreaseAction(txtName.getText(), txtAmount.getText());
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
+            }
+        });
         btnDecrease.setBounds(302, 153, 117, 29);
         frame.getContentPane().add(btnDecrease);
 
@@ -108,13 +121,23 @@ public class ClientGUI {
         ClientController.get().setStatusArea(statusArea);
 
         JButton btnSearch = new JButton("Search");
-        btnSearch.addActionListener(e -> ClientController.get().searchAction(txtPrefix.getText()));
+        btnSearch.addActionListener(e -> {
+            try {
+                ClientController.get().searchAction(txtPrefix.getText());
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
+            }
+        });
         btnSearch.setBounds(147, 269, 69, 29);
         frame.getContentPane().add(btnSearch);
 
         JButton btnClear = new JButton("Clear");
         btnClear.addActionListener(e -> {
-            ClientController.get().clearAction();
+            try {
+                ClientController.get().clearAction();
+            } catch (RemoteException e1) {
+                e1.printStackTrace();
+            }
             txtPrefix.setText("");
         });
         btnClear.setBounds(207, 269, 61, 29);

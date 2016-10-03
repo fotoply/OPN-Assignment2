@@ -42,10 +42,12 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     }
 
     protected IServer connectToServer(String serverName) {
+        System.out.println("Connecting to server at: " + serverName);
         Registry registry;
         try {
             registry = LocateRegistry.getRegistry(serverName, RMI_Config.REGISTRY_PORT);
             IServer server = (IServer)registry.lookup(RMI_Config.OBJECT_NAME);
+            System.out.println("Server connection successful");
             server.addEntryUpdateListener(this);
             return server;
         } catch (RemoteException | NotBoundException e) {
@@ -68,21 +70,21 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     /**
      * Increase button clicked in GUI
      */
-    public void increaseAction(String productName, String amountText) {
+    public void increaseAction(String productName, String amountText) throws RemoteException {
         changeEntry(productName, amountText, true);
     }
 
     /**
      * Decrease button clicked in GUI
      */
-    public void decreaseAction(String productName, String amountText) {
+    public void decreaseAction(String productName, String amountText) throws RemoteException {
         changeEntry(productName, amountText, false);
     }
 
     /**
      * Helper: generic implementation of the increase/decrease action
      */
-    private void changeEntry(String productName, String amountText, boolean increase) {
+    private void changeEntry(String productName, String amountText, boolean increase) throws RemoteException {
         int amount = Integer.parseInt(amountText);
         IEntry entry = catalogue.getEntry(productName);
         if (entry == null) {
@@ -106,7 +108,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     /**
      * Update display, showing the current entries and their total value
      */
-    private void updateDisplay() {
+    private void updateDisplay() throws RemoteException {
         // Check that controller is properly initialized
         if (catalogue == null) throw new Error("Internal error: catalogue not set");
         if (displayArea == null) throw new Error("Internal error: display area not set");
@@ -127,9 +129,9 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     /**
      * Search button clicked in GUI: use text area to show matching products
      */
-    public void searchAction(String prefix) {
+    public void searchAction(String prefix) throws RemoteException {
         StringBuffer result = new StringBuffer();
-        for (IProduct product : catalogue.search(prefix)) {
+        for (Product product : catalogue.search(prefix)) {
             result.append(product.getName()).append("\n");
         }
         displayArea.setText(result.toString());
@@ -138,7 +140,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     /**
      * Clear button clicked in GUI: go back to inventory display
      */
-    public void clearAction() {
+    public void clearAction() throws RemoteException {
         updateDisplay();
     }
 
@@ -146,7 +148,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
      * Set the inventory display object
      * (Note: high coupling, ideally use observer instead)
      */
-    public void setInventoryDisplay(JTextPane entriesDisplay) {
+    public void setInventoryDisplay(JTextPane entriesDisplay) throws RemoteException {
         this.displayArea = entriesDisplay;
         updateDisplay();
     }
@@ -161,7 +163,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     }
 
     @Override
-    public void entryUpdated() {
+    public void entryUpdated() throws RemoteException{
         updateDisplay();
     }
 }

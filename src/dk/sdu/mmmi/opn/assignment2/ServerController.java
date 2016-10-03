@@ -19,24 +19,21 @@ public class ServerController extends UnicastRemoteObject implements IServer {
     public ServerController() throws RemoteException {
         catalog = new CatalogImpl();
         listeners = new ArrayList<>();
+        System.out.println("Initialized catalog and listeners array");
     }
 
     @Override
-    public void addEntryUpdateListener(ICatalogListener newListener) {
+    public void addEntryUpdateListener(ICatalogListener newListener) throws RemoteException {
         listeners.add(newListener);
     }
 
     @Override
-    public ICatalog getCatalog() {
+    public ICatalog getCatalog() throws RemoteException{
         return catalog;
     }
 
     public static void main(String[] args) {
-        try {
-            startServer();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        startServer();
     }
 
     private static void startServer() {
@@ -44,8 +41,9 @@ public class ServerController extends UnicastRemoteObject implements IServer {
             Registry registry = LocateRegistry.createRegistry(RMI_Config.REGISTRY_PORT);
             registry.bind(RMI_Config.OBJECT_NAME, new ServerController());
         } catch (AlreadyBoundException | RemoteException e) {
-            throw new Error("Error when creating server: "+e);
+            e.printStackTrace();
+            System.out.println("Error at server start: " + e.getMessage());
         }
-        System.out.println("Server running with registry on port "+RMI_Config.REGISTRY_PORT);
+        System.out.println("Server running on port "+RMI_Config.REGISTRY_PORT);
     }
 }

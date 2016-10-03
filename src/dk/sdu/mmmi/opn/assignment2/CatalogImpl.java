@@ -34,7 +34,7 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Lookup entry by name
      */
     @Override
-    public IEntry getEntry(String name) {
+    public IEntry getEntry(String name) throws RemoteException{
         return stock.get(name);
     }
 
@@ -42,8 +42,13 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Search catalog and return all products that match the given prefix
      */
     @Override
-    public List<IProduct> search(String pattern) {
-        ArrayList<IProduct> result = stock.entrySet().stream().filter(entry -> entry.getKey().startsWith(pattern)).map(entry -> entry.getValue().getProduct()).collect(Collectors.toCollection(ArrayList::new));
+    public List<Product> search(String pattern) throws RemoteException{
+        ArrayList<Product> result = new ArrayList<>();
+        for (Map.Entry<String, IEntry> entry : stock.entrySet()) {
+            if(entry.getKey().startsWith(pattern)) {
+                result.add(entry.getValue().getProduct());
+            }
+        }
         return result;
     }
 
@@ -51,7 +56,7 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Get all names of entries
      */
     @Override
-    public Set<String> getEntryNames() {
+    public Set<String> getEntryNames() throws RemoteException{
         return new HashSet<>(stock.keySet());
     }
 

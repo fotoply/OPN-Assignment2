@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author ups
  */
-public class Product implements IProduct {
+public class Product implements Serializable{
 
     /**
      * Name of the product
@@ -31,7 +31,6 @@ public class Product implements IProduct {
     /**
      * Get name of product
      */
-    @Override
     public String getName() {
         return name;
     }
@@ -39,7 +38,6 @@ public class Product implements IProduct {
     /**
      * Get price of product
      */
-    @Override
     public float getPrice() {
         return price;
     }

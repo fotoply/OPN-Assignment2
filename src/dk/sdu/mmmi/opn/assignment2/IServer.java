@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public interface IServer extends Remote {
 
-    void addEntryUpdateListener(ICatalogListener newListener);
+    void addEntryUpdateListener(ICatalogListener newListener) throws RemoteException;
 
-    ICatalog getCatalog();
+    ICatalog getCatalog() throws RemoteException;
 }
