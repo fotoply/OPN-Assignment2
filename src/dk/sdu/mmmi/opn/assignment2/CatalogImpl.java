@@ -42,8 +42,8 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Search catalog and return all products that match the given prefix
      */
     @Override
-    public List<Product> search(String pattern) {
-        ArrayList<Product> result = stock.entrySet().stream().filter(entry -> entry.getKey().startsWith(pattern)).map(entry -> entry.getValue().getProduct()).collect(Collectors.toCollection(ArrayList::new));
+    public List<IProduct> search(String pattern) {
+        ArrayList<IProduct> result = stock.entrySet().stream().filter(entry -> entry.getKey().startsWith(pattern)).map(entry -> entry.getValue().getProduct()).collect(Collectors.toCollection(ArrayList::new));
         return result;
     }
 

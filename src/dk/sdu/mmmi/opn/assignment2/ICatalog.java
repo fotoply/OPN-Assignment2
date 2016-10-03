@@ -23,5 +23,5 @@ public interface ICatalog {
     /**
      * Search catalog and return all products that match the given prefix
      */
-    List<Product> search(String prefix);
+    List<IProduct> search(String prefix);
 }
