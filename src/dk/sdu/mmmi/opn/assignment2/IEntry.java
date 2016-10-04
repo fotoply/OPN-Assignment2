@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
  *
  * @author ups
  */
-public interface IEntry extends Remote{
+public interface IEntry extends Remote {
     int getQuantity() throws RemoteException;
 
     boolean updateQuantity(int change) throws RemoteException;

@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author ups
  */
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     /**
      * Name of the product

@@ -2,7 +2,6 @@ package dk.sdu.mmmi.opn.assignment2;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +11,7 @@ import java.util.Set;
  *
  * @author ups
  */
-public interface ICatalog extends Remote{
+public interface ICatalog extends Remote {
     /**
      * Get all names of entries
      */

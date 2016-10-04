@@ -12,7 +12,7 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author ups
  */
-public class ClientController extends UnicastRemoteObject implements ICatalogListener{
+public class ClientController extends UnicastRemoteObject implements ICatalogListener {
 
     private static IServer server;
     /**
@@ -41,20 +41,6 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
         catalogue = server.getCatalog();
     }
 
-    protected IServer connectToServer(String serverName) {
-        System.out.println("Connecting to server at: " + serverName);
-        Registry registry;
-        try {
-            registry = LocateRegistry.getRegistry(serverName, RMI_Config.REGISTRY_PORT);
-            IServer server = (IServer)registry.lookup(RMI_Config.OBJECT_NAME);
-            System.out.println("Server connection successful");
-            server.addEntryUpdateListener(this);
-            return server;
-        } catch (RemoteException | NotBoundException e) {
-            throw new Error("Error when connecting to server: "+e);
-        }
-    }
-
     /**
      * Singleton pattern access method
      */
@@ -65,6 +51,20 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
             System.out.println("Unable to connect to localhost server");
         }
         return instance;
+    }
+
+    protected IServer connectToServer(String serverName) {
+        System.out.println("Connecting to server at: " + serverName);
+        Registry registry;
+        try {
+            registry = LocateRegistry.getRegistry(serverName, RMI_Config.REGISTRY_PORT);
+            IServer server = (IServer) registry.lookup(RMI_Config.OBJECT_NAME);
+            System.out.println("Server connection successful");
+            server.addEntryUpdateListener(this);
+            return server;
+        } catch (RemoteException | NotBoundException e) {
+            throw new Error("Error when connecting to server: " + e);
+        }
     }
 
     /**
@@ -163,7 +163,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     }
 
     @Override
-    public void entryUpdated() throws RemoteException{
+    public void entryUpdated() throws RemoteException {
         updateDisplay();
     }
 }

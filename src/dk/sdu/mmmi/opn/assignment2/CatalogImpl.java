@@ -3,7 +3,6 @@ package dk.sdu.mmmi.opn.assignment2;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Implementation of a catalog
@@ -34,7 +33,7 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Lookup entry by name
      */
     @Override
-    public IEntry getEntry(String name) throws RemoteException{
+    public IEntry getEntry(String name) throws RemoteException {
         return stock.get(name);
     }
 
@@ -42,10 +41,10 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Search catalog and return all products that match the given prefix
      */
     @Override
-    public List<Product> search(String pattern) throws RemoteException{
+    public List<Product> search(String pattern) throws RemoteException {
         List<Product> result = new ArrayList<>();
         for (Map.Entry<String, IEntry> entry : stock.entrySet()) {
-            if(entry.getKey().startsWith(pattern)) {
+            if (entry.getKey().startsWith(pattern)) {
                 result.add(entry.getValue().getProduct());
             }
         }
@@ -56,7 +55,7 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Get all names of entries
      */
     @Override
-    public Set<String> getEntryNames() throws RemoteException{
+    public Set<String> getEntryNames() throws RemoteException {
         return new HashSet<>(stock.keySet());
     }
 

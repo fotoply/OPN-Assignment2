@@ -6,8 +6,8 @@ import java.util.Random;
 /**
  * Created 10/3/16
  */
-public class ServerListenerCatalog extends CatalogImpl{
-    
+public class ServerListenerCatalog extends CatalogImpl {
+
     /**
      * Create and initialize the stock
      */
