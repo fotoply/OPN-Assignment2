@@ -2,13 +2,14 @@ package dk.sdu.mmmi.opn.assignment2;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created 10/3/16
  */
 public class ServerListenerEntry extends EntryImpl {
 
-    private ArrayList<ICatalogListener> listeners = new ArrayList<>();
+    private List<ICatalogListener> listeners = new ArrayList<>();
 
     /**
      * Create entry for the given product and with the given quantity

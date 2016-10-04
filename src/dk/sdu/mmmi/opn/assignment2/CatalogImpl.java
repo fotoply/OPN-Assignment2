@@ -43,7 +43,7 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      */
     @Override
     public List<Product> search(String pattern) throws RemoteException{
-        ArrayList<Product> result = new ArrayList<>();
+        List<Product> result = new ArrayList<>();
         for (Map.Entry<String, IEntry> entry : stock.entrySet()) {
             if(entry.getKey().startsWith(pattern)) {
                 result.add(entry.getValue().getProduct());
