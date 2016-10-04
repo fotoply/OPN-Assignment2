@@ -11,8 +11,6 @@ import java.util.List;
  */
 public class ServerListenerEntry extends EntryImpl {
 
-    private List<ICatalogListener> listeners = new ArrayList<>();
-
     /**
      * Create entry for the given product and with the given quantity
      *
@@ -26,17 +24,8 @@ public class ServerListenerEntry extends EntryImpl {
     @Override
     public boolean updateQuantity(int change) {
         boolean success = super.updateQuantity(change);
-        listeners.forEach(iCatalogListener -> {
-            try {
-                iCatalogListener.entryUpdated();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        });
+        ServerController.getInstance().notifyListeners();
         return success;
     }
 
-    public void addListener(ICatalogListener newListener) {
-        listeners.add(newListener);
-    }
 }
