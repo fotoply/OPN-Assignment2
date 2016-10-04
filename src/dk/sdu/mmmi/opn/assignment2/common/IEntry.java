@@ -1,7 +1,5 @@
 package dk.sdu.mmmi.opn.assignment2.common;
 
-import dk.sdu.mmmi.opn.assignment2.server.Product;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -16,5 +14,5 @@ public interface IEntry extends Remote {
 
     boolean updateQuantity(int change) throws RemoteException;
 
-    Product getProduct() throws RemoteException;
+    IProduct getProduct() throws RemoteException;
 }

@@ -2,6 +2,7 @@ package dk.sdu.mmmi.opn.assignment2.server;
 
 import dk.sdu.mmmi.opn.assignment2.common.ICatalog;
 import dk.sdu.mmmi.opn.assignment2.common.IEntry;
+import dk.sdu.mmmi.opn.assignment2.common.IProduct;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -44,8 +45,8 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      * Search catalog and return all products that match the given prefix
      */
     @Override
-    public List<Product> search(String pattern) throws RemoteException {
-        List<Product> result = new ArrayList<>();
+    public List<IProduct> search(String pattern) throws RemoteException {
+        List<IProduct> result = new ArrayList<>();
         for (Map.Entry<String, IEntry> entry : stock.entrySet()) {
             if (entry.getKey().startsWith(pattern)) {
                 result.add(entry.getValue().getProduct());

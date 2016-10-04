@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.opn.assignment2.client;
 
 import dk.sdu.mmmi.opn.assignment2.common.*;
-import dk.sdu.mmmi.opn.assignment2.server.Product;
+import dk.sdu.mmmi.opn.assignment2.common.IProduct;
 
 import javax.swing.*;
 import java.rmi.NotBoundException;
@@ -121,9 +121,9 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
         // For each item in the stock, add it to the description list and the total value
         for (String name : catalogue.getEntryNames()) {
             IEntry entry = catalogue.getEntry(name);
-            Product product = entry.getProduct();
-            result.append(product.getName()).append("@").append(product.getPrice()).append(": ").append(entry.getQuantity()).append("\n");
-            value += entry.getQuantity() * product.getPrice();
+            IProduct IProduct = entry.getProduct();
+            result.append(IProduct.getName()).append("@").append(IProduct.getPrice()).append(": ").append(entry.getQuantity()).append("\n");
+            value += entry.getQuantity() * IProduct.getPrice();
         }
         result.append("Total value: ").append(value);
         displayArea.setText(result.toString());
@@ -134,8 +134,8 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
      */
     public void searchAction(String prefix) throws RemoteException {
         StringBuffer result = new StringBuffer();
-        for (Product product : catalogue.search(prefix)) {
-            result.append(product.getName()).append("\n");
+        for (IProduct IProduct : catalogue.search(prefix)) {
+            result.append(IProduct.getName()).append("\n");
         }
         displayArea.setText(result.toString());
     }

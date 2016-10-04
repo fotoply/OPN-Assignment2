@@ -1,9 +1,8 @@
 package dk.sdu.mmmi.opn.assignment2.server;
 
+import dk.sdu.mmmi.opn.assignment2.common.IProduct;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
-import java.io.Serializable;
 
 /**
  * Product that has a name and a price
@@ -11,7 +10,7 @@ import java.io.Serializable;
  *
  * @author ups
  */
-public class Product implements Serializable {
+public class Product implements IProduct {
 
     private StringProperty property = new SimpleStringProperty("");
 
@@ -36,6 +35,7 @@ public class Product implements Serializable {
     /**
      * Get name of product
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -43,6 +43,7 @@ public class Product implements Serializable {
     /**
      * Get price of product
      */
+    @Override
     public float getPrice() {
         return price;
     }

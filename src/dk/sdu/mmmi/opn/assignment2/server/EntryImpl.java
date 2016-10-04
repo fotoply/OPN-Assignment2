@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.opn.assignment2.server;
 
 import dk.sdu.mmmi.opn.assignment2.common.IEntry;
+import dk.sdu.mmmi.opn.assignment2.common.IProduct;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -16,7 +17,7 @@ public class EntryImpl extends UnicastRemoteObject implements IEntry {
     /**
      * The product which this entry concerns
      */
-    private Product product;
+    private dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct;
 
     /**
      * The number of products
@@ -26,9 +27,9 @@ public class EntryImpl extends UnicastRemoteObject implements IEntry {
     /**
      * Create entry for the given product and with the given quantity
      */
-    public EntryImpl(Product product, int quantity) throws RemoteException {
+    public EntryImpl(IProduct IProduct, int quantity) throws RemoteException {
         super();
-        this.product = product;
+        this.IProduct = IProduct;
         this.quantity = quantity;
     }
 
@@ -54,8 +55,8 @@ public class EntryImpl extends UnicastRemoteObject implements IEntry {
      * Get the product
      */
     @Override
-    public Product getProduct() throws RemoteException {
-        return product;
+    public IProduct getProduct() throws RemoteException {
+        return IProduct;
     }
 
 }

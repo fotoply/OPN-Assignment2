@@ -16,11 +16,11 @@ public class ServerListenerEntry extends EntryImpl {
     /**
      * Create entry for the given product and with the given quantity
      *
-     * @param product
+     * @param IProduct
      * @param quantity
      */
-    public ServerListenerEntry(Product product, int quantity) throws RemoteException {
-        super(product, quantity);
+    public ServerListenerEntry(dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct, int quantity) throws RemoteException {
+        super(IProduct, quantity);
     }
 
     @Override

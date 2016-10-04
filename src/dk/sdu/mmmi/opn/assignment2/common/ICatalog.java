@@ -1,7 +1,5 @@
 package dk.sdu.mmmi.opn.assignment2.common;
 
-import dk.sdu.mmmi.opn.assignment2.server.Product;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -27,5 +25,5 @@ public interface ICatalog extends Remote {
     /**
      * Search catalog and return all products that match the given prefix
      */
-    List<Product> search(String prefix) throws RemoteException;
+    List<IProduct> search(String prefix) throws RemoteException;
 }
