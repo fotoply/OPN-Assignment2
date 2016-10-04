@@ -68,8 +68,8 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      */
     protected void initializeStock() throws RemoteException {
         Random random = new Random();
-        for (int i = 0; i < PRODUCT_NAMES.length; i++)
-            stock.put(PRODUCT_NAMES[i], new EntryImpl(new Product(PRODUCT_NAMES[i], random.nextInt(1000) / 100.0f), random.nextInt(10)));
+        for (String PRODUCT_NAME : PRODUCT_NAMES)
+            stock.put(PRODUCT_NAME, new EntryImpl(new Product(PRODUCT_NAME, random.nextInt(1000) /  100.0f), random.nextInt(10)));
     }
 
 }
