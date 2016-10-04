@@ -1,4 +1,7 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.client;
+
+import dk.sdu.mmmi.opn.assignment2.common.*;
+import dk.sdu.mmmi.opn.assignment2.server.Product;
 
 import javax.swing.*;
 import java.rmi.NotBoundException;

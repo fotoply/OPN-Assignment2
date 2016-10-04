@@ -1,4 +1,6 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.common;
+
+import dk.sdu.mmmi.opn.assignment2.server.Product;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

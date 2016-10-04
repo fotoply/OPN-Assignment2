@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.common;
 
 /**
  * Created 10/3/16

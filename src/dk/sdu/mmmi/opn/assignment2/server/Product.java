@@ -1,4 +1,7 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.server;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.io.Serializable;
 
@@ -9,6 +12,8 @@ import java.io.Serializable;
  * @author ups
  */
 public class Product implements Serializable {
+
+    private StringProperty property = new SimpleStringProperty("");
 
     /**
      * Name of the product

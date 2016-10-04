@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.server;
 
 import java.rmi.RemoteException;
 import java.util.Random;

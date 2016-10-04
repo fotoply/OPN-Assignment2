@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.client;
 
 import javax.swing.*;
 import java.awt.*;

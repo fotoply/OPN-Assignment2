@@ -1,4 +1,9 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.server;
+
+import dk.sdu.mmmi.opn.assignment2.common.ICatalog;
+import dk.sdu.mmmi.opn.assignment2.common.ICatalogListener;
+import dk.sdu.mmmi.opn.assignment2.common.IServer;
+import dk.sdu.mmmi.opn.assignment2.common.RMI_Config;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;

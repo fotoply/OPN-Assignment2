@@ -1,4 +1,6 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.server;
+
+import dk.sdu.mmmi.opn.assignment2.common.IEntry;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

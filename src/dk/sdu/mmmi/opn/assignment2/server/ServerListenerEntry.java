@@ -1,4 +1,6 @@
-package dk.sdu.mmmi.opn.assignment2;
+package dk.sdu.mmmi.opn.assignment2.server;
+
+import dk.sdu.mmmi.opn.assignment2.common.ICatalogListener;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
