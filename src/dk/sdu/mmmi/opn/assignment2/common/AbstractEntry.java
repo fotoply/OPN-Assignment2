@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.opn.assignment2.server;
+package dk.sdu.mmmi.opn.assignment2.common;
 
 import dk.sdu.mmmi.opn.assignment2.common.IEntry;
 import dk.sdu.mmmi.opn.assignment2.common.IProduct;
@@ -7,30 +7,23 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- * Implementation of a product entry, with a mutable quantity
- * (part of the model layer of the application)
- *
- * @author ups
+ * Created 10/6/16
  */
-public class EntryImpl extends UnicastRemoteObject implements IEntry {
+public abstract class AbstractEntry extends UnicastRemoteObject implements IEntry {
 
     /**
      * The product which this entry concerns
      */
-    private dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct;
-
+    protected dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct;
     /**
      * The number of products
      */
-    private int quantity;
+    protected int quantity;
 
-    /**
-     * Create entry for the given product and with the given quantity
-     */
-    public EntryImpl(IProduct IProduct, int quantity) throws RemoteException {
+    public AbstractEntry(int quantity, IProduct IProduct) throws RemoteException {
         super();
-        this.IProduct = IProduct;
         this.quantity = quantity;
+        this.IProduct = IProduct;
     }
 
     /**
@@ -45,11 +38,7 @@ public class EntryImpl extends UnicastRemoteObject implements IEntry {
      * Change the quantity (positive number implies increase, negative number implies reduction)
      */
     @Override
-    public boolean updateQuantity(int change) {
-        if (change + quantity < 0) return false;
-        quantity += change;
-        return true;
-    }
+    public abstract boolean updateQuantity(int change);
 
     /**
      * Get the product
@@ -58,5 +47,4 @@ public class EntryImpl extends UnicastRemoteObject implements IEntry {
     public IProduct getProduct() throws RemoteException {
         return IProduct;
     }
-
 }

@@ -1,31 +1,25 @@
 package dk.sdu.mmmi.opn.assignment2.server;
 
-import dk.sdu.mmmi.opn.assignment2.common.ICatalogListener;
+import dk.sdu.mmmi.opn.assignment2.common.AbstractEntry;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created 10/3/16
+ * A version of the EntryImpl that will notify the server controller when an update occurs successfully.
  */
-public class ServerListenerEntry extends EntryImpl {
+public class ServerListenerEntry extends AbstractEntry {
 
-    /**
-     * Create entry for the given product and with the given quantity
-     *
-     * @param IProduct
-     * @param quantity
-     */
-    public ServerListenerEntry(dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct, int quantity) throws RemoteException {
-        super(IProduct, quantity);
+    public ServerListenerEntry(int quantity, dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct) throws RemoteException {
+        super(quantity, IProduct);
     }
 
     @Override
     public boolean updateQuantity(int change) {
-        boolean success = super.updateQuantity(change);
+        if (change + quantity < 0) return false;
+        quantity += change;
         ServerController.getInstance().notifyListeners();
-        return success;
+        return true;
     }
 
 }
