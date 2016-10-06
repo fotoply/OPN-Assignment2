@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
  */
 public class ServerListenerEntry extends AbstractEntry {
 
-    public ServerListenerEntry(int quantity, dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct) throws RemoteException {
+    public ServerListenerEntry(dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct, int quantity) throws RemoteException {
         super(quantity, IProduct);
     }
 
