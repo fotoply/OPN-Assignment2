@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.opn.assignment2.server;
 
 import dk.sdu.mmmi.opn.assignment2.common.*;
+import dk.sdu.mmmi.opn.assignment2.common.IServer;
 
 import java.rmi.RemoteException;
 import java.util.Random;
@@ -10,12 +11,12 @@ import java.util.Random;
  */
 public class ServerListenerCatalog extends AbstractCatalog {
 
-    IServer server;
+    IServerListenerNotifier server;
 
     /**
      * Create and initialize the stock
      */
-    public ServerListenerCatalog(IServer server) throws RemoteException {
+    public ServerListenerCatalog(IServerListenerNotifier server) throws RemoteException {
         super();
         this.server = server;
         initializeStock();

@@ -1,6 +1,8 @@
 package dk.sdu.mmmi.opn.assignment2.server;
 
 import dk.sdu.mmmi.opn.assignment2.common.*;
+import dk.sdu.mmmi.opn.assignment2.common.IServer;
+
 import java.rmi.RemoteException;
 
 /**
@@ -9,9 +11,9 @@ import java.rmi.RemoteException;
  */
 public class ServerListenerEntry extends AbstractEntry {
 
-    IServer server;
+    IServerListenerNotifier server;
 
-    public ServerListenerEntry(IProduct iProduct, int quantity, IServer server) throws RemoteException {
+    public ServerListenerEntry(IProduct iProduct, int quantity, IServerListenerNotifier server) throws RemoteException {
         super(quantity, iProduct);
         this.server = server;
     }

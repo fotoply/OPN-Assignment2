@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created 10/3/16
  */
-public class ServerController extends UnicastRemoteObject implements IServer {
+public class ServerController extends UnicastRemoteObject implements IServer, IServerListenerNotifier {
 
     private static ServerController instance;
     private ICatalog catalog;

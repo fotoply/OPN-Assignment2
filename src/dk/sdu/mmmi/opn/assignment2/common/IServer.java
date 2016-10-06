@@ -12,5 +12,5 @@ public interface IServer extends Remote {
 
     ICatalog getCatalog() throws RemoteException;
 
-    void notifyListeners() throws RemoteException;
+
 }
