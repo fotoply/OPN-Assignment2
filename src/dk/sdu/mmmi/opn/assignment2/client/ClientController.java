@@ -16,6 +16,7 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class ClientController extends UnicastRemoteObject implements ICatalogListener {
 
+    public static final String SERVER_NAME = "localhost";
     private static IServer server;
     /**
      * Singleton pattern instance
@@ -39,7 +40,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
      */
     private ClientController() throws RemoteException {
         super();
-        server = connectToServer("localhost");
+        server = connectToServer(SERVER_NAME);
         if(server != null) {
             subscribeToServer(server);
         }
@@ -58,7 +59,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
         return instance;
     }
 
-    protected IServer connectToServer(String serverName) {
+    private IServer connectToServer(String serverName) {
         System.out.println("Connecting to server at: " + serverName);
         Registry registry;
         try {

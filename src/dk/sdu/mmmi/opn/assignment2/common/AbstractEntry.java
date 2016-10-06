@@ -11,7 +11,7 @@ public abstract class AbstractEntry extends UnicastRemoteObject implements IEntr
     /**
      * The product which this entry concerns
      */
-    protected dk.sdu.mmmi.opn.assignment2.common.IProduct IProduct;
+    protected IProduct IProduct;
     /**
      * The number of products
      */
