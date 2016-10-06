@@ -43,7 +43,7 @@ public class ServerController extends UnicastRemoteObject implements IServer {
         System.out.println("Server running on port " + RMI_Config.REGISTRY_PORT);
     }
 
-    public static ServerController getInstance() {
+    public synchronized static ServerController getInstance() {
         if (instance == null) {
             try {
                 instance = new ServerController();

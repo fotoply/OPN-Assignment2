@@ -40,6 +40,9 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
     private ClientController() throws RemoteException {
         super();
         server = connectToServer("localhost");
+        if(server != null) {
+            subscribeToServer(server);
+        }
         catalogue = server.getCatalog();
     }
 
@@ -62,11 +65,14 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
             registry = LocateRegistry.getRegistry(serverName, RMI_Config.REGISTRY_PORT);
             IServer server = (IServer) registry.lookup(RMI_Config.OBJECT_NAME);
             System.out.println("Server connection successful");
-            server.addEntryUpdateListener(this);
             return server;
         } catch (RemoteException | NotBoundException e) {
             throw new Error("Error when connecting to server: " + e);
         }
+    }
+
+    private void subscribeToServer(IServer server) throws RemoteException {
+        server.addEntryUpdateListener(this);
     }
 
     /**
