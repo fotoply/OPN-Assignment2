@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.opn.assignment2.testers.mockobjects;
 
+import dk.sdu.mmmi.opn.assignment2.client.CatalogImpl;
 import dk.sdu.mmmi.opn.assignment2.common.ICatalog;
 import dk.sdu.mmmi.opn.assignment2.common.ICatalogListener;
 
@@ -17,6 +18,11 @@ public class MockServer implements dk.sdu.mmmi.opn.assignment2.common.IServer {
 
     @Override
     public ICatalog getCatalog() throws RemoteException {
-        return null;
+        return new CatalogImpl();
+    }
+
+    @Override
+    public void notifyListeners() throws RemoteException {
+
     }
 }

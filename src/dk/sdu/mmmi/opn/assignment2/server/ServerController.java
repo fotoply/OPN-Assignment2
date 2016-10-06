@@ -22,7 +22,7 @@ public class ServerController extends UnicastRemoteObject implements IServer {
     private ICatalog catalog;
     private List<ICatalogListener> listeners;
 
-    public ServerController() throws RemoteException {
+    private ServerController() throws RemoteException {
         catalog = new ServerListenerCatalog(this);
         listeners = new ArrayList<>();
         System.out.println("Initialized catalog");

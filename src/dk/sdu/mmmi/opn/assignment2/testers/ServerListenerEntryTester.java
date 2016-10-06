@@ -19,13 +19,17 @@ public class ServerListenerEntryTester {
 
     @Before
     public void setUp() throws Exception {
-        entry = new ServerListenerEntry(new MockProduct(), 0);
         server = new MockServer();
+        entry = new ServerListenerEntry(new MockProduct(), 0, server);
     }
 
     @Test
     public void updateQuantity() throws Exception {
-
+        entry.updateQuantity(1);
+        assertEquals("Can increase value: ", 1, entry.getQuantity());
+        entry.updateQuantity(-1);
+        assertEquals("Can decrease value: ", 0, entry.getQuantity());
+        assertEquals("Cannot go below 0: ", false, entry.updateQuantity(-1) || entry.getQuantity() == -1);
     }
 
 }
