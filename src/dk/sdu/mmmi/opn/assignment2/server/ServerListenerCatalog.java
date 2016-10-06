@@ -1,17 +1,22 @@
 package dk.sdu.mmmi.opn.assignment2.server;
 
+import dk.sdu.mmmi.opn.assignment2.client.CatalogImpl;
+import dk.sdu.mmmi.opn.assignment2.common.AbstractCatalog;
+
 import java.rmi.RemoteException;
 import java.util.Random;
 
 /**
  * Created 10/3/16
  */
-public class ServerListenerCatalog extends CatalogImpl {
+public class ServerListenerCatalog extends AbstractCatalog {
 
     /**
      * Create and initialize the stock
      */
     public ServerListenerCatalog() throws RemoteException {
+        super();
+        initializeStock();
     }
 
     @Override

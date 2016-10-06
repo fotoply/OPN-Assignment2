@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.opn.assignment2.server;
+package dk.sdu.mmmi.opn.assignment2.common;
 
 import dk.sdu.mmmi.opn.assignment2.common.ICatalog;
 import dk.sdu.mmmi.opn.assignment2.common.IEntry;
@@ -9,12 +9,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 /**
- * Implementation of a catalog
- * (part of the model layer of the application)
- *
- * @author ups
+ * Created 10/6/16
  */
-public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
+public abstract class AbstractCatalog extends UnicastRemoteObject implements ICatalog {
 
     protected static final String[] PRODUCT_NAMES = {
             "cucumber", "carrot", "potato", "pear", "apple", "zucchini", "beet", "onion", "tomato", "orange", "banana", "grapes", "sweet potato",
@@ -25,12 +22,8 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
      */
     protected Map<String, IEntry> stock = new HashMap<>();
 
-    /**
-     * Create and initialize the stock
-     */
-    public CatalogImpl() throws RemoteException {
+    public AbstractCatalog() throws RemoteException {
         super();
-        initializeStock();
     }
 
     /**
@@ -66,10 +59,5 @@ public class CatalogImpl extends UnicastRemoteObject implements ICatalog {
     /**
      * Initialize stock with dummy products
      */
-    protected void initializeStock() throws RemoteException {
-        Random random = new Random();
-        for (String PRODUCT_NAME : PRODUCT_NAMES)
-            stock.put(PRODUCT_NAME, new EntryImpl(new Product(PRODUCT_NAME, random.nextInt(1000) /  100.0f), random.nextInt(10)));
-    }
-
+    protected abstract void initializeStock() throws RemoteException;
 }
