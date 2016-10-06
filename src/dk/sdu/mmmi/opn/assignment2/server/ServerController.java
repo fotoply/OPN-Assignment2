@@ -57,11 +57,14 @@ public class ServerController extends UnicastRemoteObject implements IServer, IS
     @Override
     public void notifyListeners() {
         for (ICatalogListener listener : listeners) {
-            try {
-                listener.entryUpdated();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+            new Thread(() -> {
+                try {
+                    listener.entryUpdated();
+                } catch (RemoteException e) {
+                    listeners.remove(listener);
+                    System.out.println("Listener did not respond, removing");
+                }
+            }).start();
         }
     }
 
