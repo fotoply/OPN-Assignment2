@@ -18,12 +18,12 @@ public class ProductTester {
 
     @org.junit.Test
     public void getName() throws Exception {
-        assert product.getName().equals("Test");
+        assertEquals("Name was incorrect", "Test", product.getName());
     }
 
     @org.junit.Test
     public void getPrice() throws Exception {
-        assert product.getPrice() == 1;
+        assertEquals("Price was incorrect", 1, product.getPrice(), 1);
     }
 
 }

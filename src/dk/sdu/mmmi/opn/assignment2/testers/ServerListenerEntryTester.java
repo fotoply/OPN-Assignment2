@@ -26,10 +26,10 @@ public class ServerListenerEntryTester {
     @Test
     public void updateQuantity() throws Exception {
         entry.updateQuantity(1);
-        assertEquals("Can increase value: ", 1, entry.getQuantity());
+        assertEquals("Quantity was not incerased", 1, entry.getQuantity());
         entry.updateQuantity(-1);
-        assertEquals("Can decrease value: ", 0, entry.getQuantity());
-        assertEquals("Cannot go below 0: ", false, entry.updateQuantity(-1) || entry.getQuantity() == -1);
+        assertEquals("Quantity was not decreased", 0, entry.getQuantity());
+        assertEquals("Quantity is below 0", false, entry.updateQuantity(-1) || entry.getQuantity() == -1);
     }
 
 }

@@ -24,7 +24,7 @@ public class ServerListenerCatalogTester {
 
     @Test
     public void initializeStock() throws Exception {
-        assert catalog.getEntryNames().size() > 0;
+        assertEquals("Catalog was empty.", true, catalog.getEntryNames().size() > 0);
     }
 
 }
