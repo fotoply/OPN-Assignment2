@@ -9,15 +9,22 @@ import java.rmi.RemoteException;
  */
 public class ServerListenerEntry extends AbstractEntry {
 
-    public ServerListenerEntry(IProduct iProduct, int quantity) throws RemoteException {
+    IServer server;
+
+    public ServerListenerEntry(IProduct iProduct, int quantity, IServer server) throws RemoteException {
         super(quantity, iProduct);
+        this.server = server;
     }
 
     @Override
     public boolean updateQuantity(int change) {
         if (change + quantity < 0) return false;
         quantity += change;
-        ServerController.getInstance().notifyListeners();
+        try {
+            server.notifyListeners();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 

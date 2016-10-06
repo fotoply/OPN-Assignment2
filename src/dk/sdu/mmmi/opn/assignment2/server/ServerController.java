@@ -23,7 +23,7 @@ public class ServerController extends UnicastRemoteObject implements IServer {
     private List<ICatalogListener> listeners;
 
     public ServerController() throws RemoteException {
-        catalog = new ServerListenerCatalog();
+        catalog = new ServerListenerCatalog(this);
         listeners = new ArrayList<>();
         System.out.println("Initialized catalog");
     }
@@ -54,7 +54,8 @@ public class ServerController extends UnicastRemoteObject implements IServer {
         return instance;
     }
 
-    void notifyListeners() {
+    @Override
+    public void notifyListeners() {
         for (ICatalogListener listener : listeners) {
             try {
                 listener.entryUpdated();

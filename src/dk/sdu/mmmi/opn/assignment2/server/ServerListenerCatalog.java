@@ -10,11 +10,14 @@ import java.util.Random;
  */
 public class ServerListenerCatalog extends AbstractCatalog {
 
+    IServer server;
+
     /**
      * Create and initialize the stock
      */
-    public ServerListenerCatalog() throws RemoteException {
+    public ServerListenerCatalog(IServer server) throws RemoteException {
         super();
+        this.server = server;
         initializeStock();
     }
 
@@ -22,7 +25,7 @@ public class ServerListenerCatalog extends AbstractCatalog {
     protected void initializeStock() throws RemoteException {
         Random random = new Random();
         for (String PRODUCT_NAME : PRODUCT_NAMES)
-            stock.put(PRODUCT_NAME, new ServerListenerEntry(new Product(PRODUCT_NAME, random.nextInt(1000) / 100.0f), random.nextInt(10)));
+            stock.put(PRODUCT_NAME, new ServerListenerEntry(new Product(PRODUCT_NAME, random.nextInt(1000) / 100.0f), random.nextInt(10), server));
 
     }
 }
