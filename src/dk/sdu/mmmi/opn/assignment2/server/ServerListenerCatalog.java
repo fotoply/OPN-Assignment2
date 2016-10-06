@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.opn.assignment2.server;
 
-import dk.sdu.mmmi.opn.assignment2.common.*;
-import dk.sdu.mmmi.opn.assignment2.common.IServer;
+import dk.sdu.mmmi.opn.assignment2.common.AbstractCatalog;
+import dk.sdu.mmmi.opn.assignment2.common.Product;
 
 import java.rmi.RemoteException;
 import java.util.Random;

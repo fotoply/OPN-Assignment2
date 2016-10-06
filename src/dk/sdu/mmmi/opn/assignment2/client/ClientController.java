@@ -127,9 +127,9 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
         // For each item in the stock, add it to the description list and the total value
         for (String name : catalogue.getEntryNames()) {
             IEntry entry = catalogue.getEntry(name);
-            IProduct IProduct = entry.getProduct();
-            result.append(IProduct.getName()).append("@").append(IProduct.getPrice()).append(": ").append(entry.getQuantity()).append("\n");
-            value += entry.getQuantity() * IProduct.getPrice();
+            IProduct product = entry.getProduct();
+            result.append(product.getName()).append("@").append(product.getPrice()).append(": ").append(entry.getQuantity()).append("\n");
+            value += entry.getQuantity() * product.getPrice();
         }
         result.append("Total value: ").append(value);
         displayArea.setText(result.toString());

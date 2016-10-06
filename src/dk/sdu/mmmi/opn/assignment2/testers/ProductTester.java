@@ -3,7 +3,7 @@ package dk.sdu.mmmi.opn.assignment2.testers;
 import dk.sdu.mmmi.opn.assignment2.common.IProduct;
 import dk.sdu.mmmi.opn.assignment2.common.Product;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created 10/6/16

@@ -1,19 +1,19 @@
 package dk.sdu.mmmi.opn.assignment2.testers;
 
 import dk.sdu.mmmi.opn.assignment2.common.ICatalog;
-import dk.sdu.mmmi.opn.assignment2.common.IServer;
+import dk.sdu.mmmi.opn.assignment2.server.IServerListenerNotifier;
 import dk.sdu.mmmi.opn.assignment2.server.ServerListenerCatalog;
 import dk.sdu.mmmi.opn.assignment2.testers.mockobjects.MockServer;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created 10/6/16
  */
 public class ServerListenerCatalogTester {
-    IServer server;
+    IServerListenerNotifier server;
     ICatalog catalog;
 
     @Before
