@@ -115,7 +115,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
         if (catalogue == null) throw new Error("Internal error: catalogue not set");
         if (displayArea == null) throw new Error("Internal error: display area not set");
         // Then do the display
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         float value = 0;
         // For each item in the stock, add it to the description list and the total value
         for (String name : catalogue.getEntryNames()) {
@@ -132,7 +132,7 @@ public class ClientController extends UnicastRemoteObject implements ICatalogLis
      * Search button clicked in GUI: use text area to show matching products
      */
     public void searchAction(String prefix) throws RemoteException {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         for (IProduct IProduct : catalogue.search(prefix)) {
             result.append(IProduct.getName()).append("\n");
         }
