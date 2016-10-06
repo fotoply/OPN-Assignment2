@@ -1,8 +1,5 @@
 package dk.sdu.mmmi.opn.assignment2.common;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 /**
  * Product that has a name and a price
  * (part of the model layer of the application)
@@ -10,8 +7,6 @@ import javafx.beans.property.StringProperty;
  * @author ups
  */
 public class Product implements IProduct {
-
-    private StringProperty property = new SimpleStringProperty("");
 
     /**
      * Name of the product

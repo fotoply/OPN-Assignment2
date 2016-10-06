@@ -16,7 +16,7 @@ public abstract class AbstractCatalog extends UnicastRemoteObject implements ICa
     /**
      * Contents of the catalog
      */
-    protected Map<String, IEntry> stock = new HashMap<>();
+    protected final Map<String, IEntry> stock = new HashMap<>();
 
     public AbstractCatalog() throws RemoteException {
         super();
