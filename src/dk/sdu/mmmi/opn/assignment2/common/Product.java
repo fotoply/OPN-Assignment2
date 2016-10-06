@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.opn.assignment2.common;
 
-import dk.sdu.mmmi.opn.assignment2.common.IProduct;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

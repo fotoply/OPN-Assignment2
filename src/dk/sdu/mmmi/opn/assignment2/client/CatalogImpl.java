@@ -4,7 +4,7 @@ import dk.sdu.mmmi.opn.assignment2.common.AbstractCatalog;
 import dk.sdu.mmmi.opn.assignment2.common.Product;
 
 import java.rmi.RemoteException;
-import java.util.*;
+import java.util.Random;
 
 /**
  * Implementation of a catalog
@@ -26,7 +26,7 @@ public class CatalogImpl extends AbstractCatalog {
     protected void initializeStock() throws RemoteException {
         Random random = new Random();
         for (String PRODUCT_NAME : PRODUCT_NAMES)
-            stock.put(PRODUCT_NAME, new EntryImpl(new Product(PRODUCT_NAME, random.nextInt(1000) /  100.0f), random.nextInt(10)));
+            stock.put(PRODUCT_NAME, new EntryImpl(new Product(PRODUCT_NAME, random.nextInt(1000) / 100.0f), random.nextInt(10)));
     }
 
 }

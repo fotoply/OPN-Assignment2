@@ -6,7 +6,6 @@ import dk.sdu.mmmi.opn.assignment2.common.IServer;
 import dk.sdu.mmmi.opn.assignment2.common.RMI_Config;
 
 import java.rmi.AlreadyBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -45,7 +44,7 @@ public class ServerController extends UnicastRemoteObject implements IServer {
     }
 
     public static ServerController getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             try {
                 instance = new ServerController();
             } catch (RemoteException e) {

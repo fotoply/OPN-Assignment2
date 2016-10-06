@@ -1,9 +1,5 @@
 package dk.sdu.mmmi.opn.assignment2.common;
 
-import dk.sdu.mmmi.opn.assignment2.common.ICatalog;
-import dk.sdu.mmmi.opn.assignment2.common.IEntry;
-import dk.sdu.mmmi.opn.assignment2.common.IProduct;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
